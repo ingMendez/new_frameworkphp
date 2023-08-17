@@ -6,6 +6,7 @@ use App\Models\EmpleadoModel;
 use ErrorHandler;
 use Exception;
 use Validator;
+use ViewHelper;
 
 class EmpleadoController
 {
@@ -94,9 +95,15 @@ class EmpleadoController
         // include_once('../app/Views/empleados.php');
         try {
             // Tu código para obtener empleados
-            $empleados = EmpleadoModel::obtenerEmpleadosConDepartamento();
-            include_once('../app/Views/empleados.php');
+            $empleados = EmpleadoModel::obtenerEmpleados();
+            // print_r($empleados);
+            $totalEmpleados = count($empleados);
+            $empleadosPorPagina = 10; // Cambia esto según tu paginación
+            $totalPages = ceil($totalEmpleados / $empleadosPorPagina);
+            // include_once('../app/Views/empleados/index.php');
+           return ViewHelper::view('empleados/index',['empleados' => $empleados, 'totalPages' => $totalPages]);
         } catch (Exception $e) {
+            // var_dump($e);
             ErrorHandler::showError('Hubo un problema al cargar los empleados.');
         }
 

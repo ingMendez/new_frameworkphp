@@ -1,0 +1,61 @@
+/* Estilos para el cuerpo de la página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos para el encabezado */
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Estilos para la barra de navegación */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background-color: #444;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Estilos para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Estilos para la paginación */
+.pagination {
+    margin-top: 20px;
+}
+
+.pagination a {
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.pagination a:hover {
+    background-color: #ccc;
+}

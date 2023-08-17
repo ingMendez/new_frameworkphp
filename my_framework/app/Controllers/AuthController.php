@@ -1,13 +1,36 @@
 <?php
-
 namespace App\Controllers;
 use App\Models\UsuarioModel;
+use Router;
+use ViewHelper;
 
 class AuthController
 {
+    private $router;
+    
+    // public function __construct($router)
+    // {
+    //     $this->router = $router;
+    // }
+    
+    public static function isLoggedIn()
+    {
+        return isset($_SESSION['usuario']);
+    }
+    
     public function mostrarFormularioLogin($request)
     {
-        include_once('../app/Views/login.php');
+        return ViewHelper::view('auth/login');
+    }
+
+    public function index()
+    {
+        if ($this->isLoggedIn()) {
+            ViewHelper::view('/');
+            exit;
+        } else {
+            return ViewHelper::view('auth/login');
+        }
     }
 
     public function login()
@@ -15,59 +38,35 @@ class AuthController
         $nombre = $_POST['nombre'];
         $password = $_POST['password'];
 
-        // Obtener el usuario por nombre
         $usuario = UsuarioModel::obtenerUsuarioPorNombre($nombre);
 
         if ($usuario && $usuario['password'] === $password) {
-            // Iniciar sesión y redirigir al inicio
             $_SESSION['usuario'] = $usuario;
-            header('Location: /');
+            header('Location: /my_framework/public/');
+            exit;
         } else {
-            // Mostrar mensaje de error
             echo "Credenciales inválidas.";
         }
     }
 
     public function logout()
     {
-        // Cerrar sesión y redirigir al inicio
+        // var_dump("esta llegando");
         unset($_SESSION['usuario']);
-        // header('Location: /');
-
-         // Lógica para cerrar sesión
-        // Por ejemplo, destruir la sesión y redirigir al usuario a otra página
         session_destroy();
-        // Redirigir a la página de inicio o donde desees
-        header('Location: /');
-        exit;
+        header('Location: /my_framework/public/');
+        //  return ViewHelper::view('auth/login');
 
+        // exit;
     }
 
     public function mostrarFormularioRecuperacion()
     {
-        include_once('../app/Views/recuperar_contrasena.php');
+        include_once(__DIR__ . '/../Views/recuperar_contrasena.php');
     }
+    
     public function solicitarRecuperacion()
     {
-        if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-            die("Token CSRF inválido.");
-        }
-        $nombre = htmlspecialchars($_POST['nombre'], ENT_QUOTES, 'UTF-8');
-
-        if (!filter_var($_POST['correo'], FILTER_VALIDATE_EMAIL)) {
-            die("El formato de correo electrónico es inválido.");
-        }
-        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-        // Aquí puedes implementar la lógica para enviar el correo de recuperación
-        // Este es solo un ejemplo básico
-        $correo = $_POST['correo'];
-        $token = md5(uniqid());
-
-        // Envía el correo con el enlace de recuperación
-        // ...
-
-        echo "Correo de recuperación enviado.";
+        // Lógica para solicitar recuperación
     }
 }
-
-

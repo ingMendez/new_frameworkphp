@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\Database; 
 class EmpleadoModel
 {
     public static function obtenerEmpleados()
     {
         // Simulamos una consulta a la base de datos
         $empleados = [
-            ['id' => 1, 'nombre' => 'John', 'apellido' => 'Doe', 'email' => 'john@example.com'],
-            ['id' => 2, 'nombre' => 'Jane', 'apellido' => 'Smith', 'email' => 'jane@example.com'],
+            ['id' => 1, 'nombre' => 'John', 'apellido' => 'Doe', 'email' => 'john@example.com','departamento_nombre'=>'la perla'],
+            ['id' => 2, 'nombre' => 'Jane', 'apellido' => 'Smith', 'email' => 'jane@example.com','departamento_nombre'=>'la crema'],
         ];
 
         return $empleados;
@@ -19,8 +19,8 @@ class EmpleadoModel
     {
         // Simulamos una consulta a la base de datos por ID
         $empleados = [
-            ['id' => 1, 'nombre' => 'John', 'apellido' => 'Doe', 'email' => 'john@example.com'],
-            ['id' => 2, 'nombre' => 'Jane', 'apellido' => 'Smith', 'email' => 'jane@example.com'],
+            ['id' => 1, 'nombre' => 'John', 'apellido' => 'Doe', 'email' => 'john@example.com','departamento_nombre'=>'la perla'],
+            ['id' => 2, 'nombre' => 'Jane', 'apellido' => 'Smith', 'email' => 'jane@example.com','departamento_nombre'=>'la crema'],
         ];
 
         foreach ($empleados as $empleado) {

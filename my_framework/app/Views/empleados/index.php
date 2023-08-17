@@ -1,7 +1,9 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 $titulo = 'Listado de Empleados';
 ob_start();
-session_start();
 $csrfToken = bin2hex(random_bytes(32));
 $_SESSION['csrf_token'] = $csrfToken;
 ?>
@@ -37,10 +39,10 @@ $_SESSION['csrf_token'] = $csrfToken;
             <a href="/empleados?page=<?php echo $i; ?>"><?php echo $i; ?></a>
         <?php endfor; ?>
     </div>
-    <a href="/">Volver al Inicio</a>
+    <a href="/my_framework/public/">Volver al Inicio</a>
     <script src="../public/js/script.js"></script>
 
 <?php
 $contenido = ob_get_clean();
-include_once('layout.php');
+include_once(__DIR__ . '/../layout.php');
 ?>
