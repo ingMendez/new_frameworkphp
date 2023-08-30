@@ -81,7 +81,7 @@ class EmpleadoController
     public function index()
     {
         if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['rol'] !== 'admin') {
-            header('Location: /login');
+            header('Location: /');
             return;
         }
         // // Obtener empleados desde el modelo
@@ -108,17 +108,25 @@ class EmpleadoController
         }
 
     }
-    public function show($id)
+    public function show($request,$matches)
     {
+        if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['rol'] !== 'admin') {
+            header('Location: /');
+            return;
+        }
+        $id = $matches[1];
         // Obtener el empleado desde el modelo por su ID
+        //  var_dump($id);
         $empleado = EmpleadoModel::obtenerEmpleadoPorId($id);
 
         // Cargar la vista 'empleado.php' y pasar los datos
+        
         ob_start();
-        include_once('../app/Views/empleado.php');
+        // include('../app/Views/empleados/show.php');
         $html = ob_get_clean();
-
-        echo $html;
+// print_r($empleado);
+        echo  json_encode($empleado);
+        //  echo  $html;
     }
     public function crear()
     {

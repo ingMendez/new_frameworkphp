@@ -42,7 +42,7 @@ class AuthController
 
         if ($usuario && $usuario['password'] === $password) {
             $_SESSION['usuario'] = $usuario;
-            header('Location: /my_framework/public/');
+            header('Location: /');
             exit;
         } else {
             echo "Credenciales inválidas.";
@@ -54,7 +54,7 @@ class AuthController
         // var_dump("esta llegando");
         unset($_SESSION['usuario']);
         session_destroy();
-        header('Location: /my_framework/public/');
+        header('Location: /');
         //  return ViewHelper::view('auth/login');
 
         // exit;
