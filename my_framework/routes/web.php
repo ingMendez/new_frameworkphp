@@ -49,7 +49,7 @@ $router->addRoute('GET', '/auth/login', [AuthController::class, 'mostrarFormular
 $router->addMiddleware(new RegistroActividadMiddleware());
 $router->addRoute('POST', '/auth/login', [AuthController::class, 'login']);
 $router->addMiddleware(new RegistroActividadMiddleware());
-$router->addRoute('GET', '/my_framework/public/auth/logout', 'AuthController::logout');
+$router->addRoute('GET', '/auth/logout', 'AuthController::logout');
 $router->addMiddleware(new RegistroActividadMiddleware());
 
 // ¡No olvides cerrar PHP si lo abres para incluir otros archivos!
