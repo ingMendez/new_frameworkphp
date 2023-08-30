@@ -4,10 +4,11 @@ $(document).ready(function () {
 
 function cargarEmpleados() {
     $.ajax({
-        url: '/empleados', // Ruta a tu controlador EmpleadoController
+        url: 'empleados', // Ruta a tu controlador EmpleadoController
         type: 'GET',
-        dataType: 'json',
+        // dataType: 'json',
         success: function (data) {
+            console.log(data);
             mostrarEmpleados(data);
         },
         error: function (xhr, status, error) {
@@ -33,9 +34,18 @@ function cargarEmpleado(id) {
     $.ajax({
         url: '/empleados/' + id, // Ruta a tu controlador EmpleadoController
         type: 'GET',
-        dataType: 'html',
+       dataType: 'json',
         success: function (data) {
-            $('#empleados-container').html(data);
+            console.log(data);
+            $('#employeeDetails').html(`
+                <p>ID: ${data.id}</p>
+                <p>Nombre: ${data.nombre}</p>
+                <p>Apellido: ${data.apellido}</p>
+                <p>Email: ${data.email}</p>
+                <p>Departamento: ${data.departamento_nombre}</p>
+                <!-- Agregar más detalles según tu estructura de datos -->
+            `);
+            $('#employeeModal').modal('show');
         },
         error: function (xhr, status, error) {
             console.error('Error:', status, error);
